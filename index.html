@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang='vi' class='v2'>
+<head>    
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  <meta content='Tràn ngập bộ nhớ' property='og:title'/>
+  <link href='https://i.imgur.com/ZyFRpse.png' rel='shortcut icon' type='image/x-icon'/>
+  <meta content='Con gai share code cho ae choii' name='description'/>
+  <meta content='honglin, thanhdieu, honglie' name='keywords'/>
+  <link href='https://showskilltttt.blogspot.com/' rel='canonical'/>
+  <meta content='Vuong Lin' name='author'/>
+  <meta content='website' property='og:type'/>
+  <meta content='#FCFCFD' name='theme-color'/>
+  <meta content='https://i.pinimg.com/736x/80/b8/68/80b8687aaeccb6fb90140597a0be2db5.jpg' property='og:image'/>
+  <link href='https://fonts.googleapis.com/css2?family=Coiny&amp;display=swap' rel='stylesheet'/>
+  <title>Tràn ngập bộ nhớ</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #eeeeee;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    h1 {
+      font-family: "Coiny", system-ui;
+      font-size: 50px;
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    button {
+      font-family: "Coiny", system-ui;
+      position: absolute;
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #0a2b57;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .notification {
+      position: absolute;
+      width: 240px;
+      height: 160px;
+      background-color: #FFB6C1;
+      font-size: 16px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      z-index: 2;
+      border: 4px solid #ffffff;
+    }
+    .notification-header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 5px;
+      background-color: #ffffff;
+      border-radius: 5px 5px 0 0;
+    }
+    .notification p {
+      margin: 0;
+      text-align: center;
+      padding: 10px;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .minimize-btn {
+      font-size: 20px;
+      cursor: pointer;
+      padding: 5px;
+      background-color: transparent;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+    <h1>Anh có điều muốn nói :3</h1>
+    <button id='playButton' onclick='generateRandomNotifications()'>Nhấn đây nè</button>
+    <audio id='audioPlayer' src='https://thaihonglam2008.github.io/musik/TBN.mp3'></audio>
+    
+    <script>
+      const playButton = document.getElementById("playButton");
+      const audioPlayer = document.getElementById("audioPlayer");
+
+      playButton.addEventListener("click", function() {
+          audioPlayer.play();
+      });
+
+      const messages = ["Nhớ nhớ nhớ em!"];
+
+      function generateRandomNotifications() {
+          const notificationCount = 100;
+
+          for (let i = 0; i < notificationCount; i++) {
+              setTimeout(() => {
+                  const notification = document.createElement('div');
+                  notification.className = 'notification';
+
+                  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                  const messageText = document.createElement('p');
+                  messageText.textContent = randomMessage;
+                  
+                  notification.innerHTML = `
+                    <div class='notification-header'>
+                      <button class='minimize-btn' onclick='minimizeNotification(this)'>&#8211;</button>
+                      <span>Tràn ngập bộ</span>
+                    </div>
+                  `;
+                  notification.appendChild(messageText);
+
+                  const x = Math.max(0, Math.random() * (window.innerWidth - 240));
+                  const y = Math.max(0, Math.random() * (window.innerHeight - 160));
+                  notification.style.left = `${x}px`;
+                  notification.style.top = `${y}px`;
+
+                  document.body.appendChild(notification);
+              }, i * 200);
+          }
+      }
+
+      function minimizeNotification(button) {
+          const notification = button.closest('.notification');
+          if (notification) {
+              notification.style.display = 'none';
+          }
+      }
+    </script>
+</body>
+</html>
